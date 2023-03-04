@@ -2,6 +2,7 @@ package com.spring.delivery.entity;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,8 @@ import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,8 +28,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Builder
-public class User {
+public class User implements UserDetails{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	private String userId;
 	
@@ -59,6 +64,43 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
 	@JsonIgnore
 	private List<Delivery> deliverys = new ArrayList<Delivery>();
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		 Collection<GrantedAuthority> authorities = new ArrayList<>();
+		 authorities.add(() ->this.level);
+		 return authorities;  
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return this.userId;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 	
 
 }
