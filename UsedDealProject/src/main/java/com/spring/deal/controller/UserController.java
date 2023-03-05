@@ -19,7 +19,6 @@ public class UserController {
 	
 	@PostMapping("join")
 	public ResponseEntity<?> join(@RequestBody UserDTO userDTO){
-		System.out.println(userDTO);
 		return userService.joinUser(userDTO);
 	}
 }

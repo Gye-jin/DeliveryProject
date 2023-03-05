@@ -7,5 +7,6 @@ import com.spring.deal.entity.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, String>{
-
+	
+	public boolean existsByUserId(String Userid);
 }
