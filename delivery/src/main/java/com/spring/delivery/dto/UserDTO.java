@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+import com.spring.delivery.entity.userEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +21,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class UserDTO {
 	
-	@Id
 	private String userId;
 	
 	private String password;
@@ -32,7 +33,7 @@ public class UserDTO {
 	
 	private String address;
 	
-	private String level;
+	private userEnum level;
 	
 	@CreatedDate
 	@Column(updatable = false)

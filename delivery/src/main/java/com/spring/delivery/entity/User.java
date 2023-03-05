@@ -51,7 +51,7 @@ public class User implements UserDetails{
 	private String address;
 	
 	@Column(nullable = false)
-	private String level;
+	private userEnum level;
 	
 	@CreatedDate
 	@Column(updatable = false,nullable = false)
@@ -68,7 +68,7 @@ public class User implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		 Collection<GrantedAuthority> authorities = new ArrayList<>();
-		 authorities.add(() ->this.level);
+		 authorities.add(() ->this.level.toString());
 		 return authorities;  
 	}
 
