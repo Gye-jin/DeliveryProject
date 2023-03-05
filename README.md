@@ -1,2 +1,2 @@
-# DeliveryProject
- 배달 플랫폼 API
+# UsedDealProject
+ 중고거래 API
