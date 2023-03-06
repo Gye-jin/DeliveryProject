@@ -17,7 +17,7 @@ public class JwtProcess {
 					.withClaim("userId",user.getUserId())
 					.withClaim("level", user.getAccountType().toString())
 					.sign(Algorithm.HMAC512(JwtProperties.SECRET));
-	        return JwtProperties.TOKEN_PREFIX + jwtToken;
+	        return jwtToken;
 	    }
 
 	    public static User verify(String token) {

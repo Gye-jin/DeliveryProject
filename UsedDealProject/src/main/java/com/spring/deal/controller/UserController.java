@@ -17,8 +17,14 @@ public class UserController {
 	@Autowired
 	UserServiceImpl userService;
 	
-	@PostMapping("join")
+	@PostMapping("/join")
 	public ResponseEntity<?> join(@RequestBody UserDTO userDTO){
 		return userService.joinUser(userDTO);
 	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody UserDTO userDTO){
+		return userService.login(userDTO);
+	}
 }
+

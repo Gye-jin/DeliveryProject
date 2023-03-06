@@ -37,4 +37,14 @@ public class UserServiceImpl implements UserService{
 		
 		return new ResponseEntity<>(new ResponseDTO<>("회원가입성공",user.getUserId()),HttpStatus.CREATED);
 	}
+	
+	@Override
+	public ResponseEntity<?> login(UserDTO userDTO){
+		User user = userRepository.findById(userDTO.getUserId()).orElseThrow(() -> new ApiControllerException(ErrorCode.UNAUTHORIZED));
+		if(!user.getPassword().equals(encoder.encode(userDTO.getPassword()))){
+			throw new ApiControllerException(ErrorCode.CONFILICT);
+		}
+		System.out.println(user);
+		return new ResponseEntity<>(new ResponseDTO<>("로그인",userDTO.getUserId()),HttpStatus.OK);
+	}
 }

@@ -38,7 +38,7 @@ public class User implements UserDetails{
 	@Column(name = "user_id")
 	private String userId;
 	
-	@Column(nullable = false)
+	@Column(nullable = false,name = "password")
 	private String password;
 	
 	@Column(nullable = false)
@@ -80,6 +80,12 @@ public class User implements UserDetails{
 	public String getUsername() {
 		// TODO Auto-generated method stub
 		return this.userId;
+	}
+	
+	@Override
+	public String getPassword() {
+		// TODO Auto-generated method stub
+		return this.password;
 	}
 
 	@Override
@@ -126,6 +132,8 @@ public class User implements UserDetails{
 				.build();
 		return user;
 	}
+
+
 	
 	
 }

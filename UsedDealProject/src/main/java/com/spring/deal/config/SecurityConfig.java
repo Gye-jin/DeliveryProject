@@ -29,6 +29,7 @@ public class SecurityConfig {
             AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
             http.addFilter(new JwtAuthenticationFilter(authenticationManager));
             http.addFilter(new JwtAuthorizationFilter(authenticationManager));
+
         }
     }
 		
@@ -38,7 +39,7 @@ public class SecurityConfig {
 	    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 	        http.csrf().disable()
 	        .authorizeRequests()
-	        .antMatchers("/join").permitAll()
+	        .antMatchers("/join","/login").permitAll()
 			.antMatchers("/api/**").authenticated()
 			.and()
 			.sessionManagement()
@@ -46,7 +47,8 @@ public class SecurityConfig {
 			.and()
 			.formLogin().disable()
 			.httpBasic().disable();
-	        
+	        http.apply(new CustomSecurityFilterManager());
+
 	        return http.build();
 	    }
 	
