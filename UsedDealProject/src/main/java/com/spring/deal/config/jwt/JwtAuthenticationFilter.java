@@ -38,14 +38,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			ObjectMapper om = new ObjectMapper();
 			User user;
 			user = om.readValue(request.getInputStream(), User.class);
-			System.out.println("login2");
 			UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 					user.getUserId(), user.getPassword());
-			System.out.println(user.getUserId());
-			System.out.println(user.getPassword());
 			System.out.println(authenticationToken);
 			Authentication authentication = authenticationManager.authenticate(authenticationToken);
-			System.out.println("authentication");
 			return authentication;
 
 		} catch (IOException e) {

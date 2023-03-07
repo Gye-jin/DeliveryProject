@@ -16,6 +16,8 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.spring.deal.dto.ItemDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,11 +50,27 @@ public class Item {
 	@Column(nullable = false, name = "updated_at")
 	private Timestamp updatedAt;
 	
-	private Boolean success;
+	private boolean success;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	public static Item DTOtoEntity(ItemDTO itemDTO) {
+		Item item = Item.builder()
+						.itemId(itemDTO.getItemId())
+						.itemName(itemDTO.getItemName())
+						.itemDescription(itemDTO.getItemDescription())
+						.createdAt(itemDTO.getCreatedAt())
+						.updatedAt(itemDTO.getUpdatedAt())
+						.success(itemDTO.isSuccess())
+						.build();
+		return item;
+	}
+	
+	public void registerUser(User user) {
+		this.user = user;
+	}
 	
 	
 }

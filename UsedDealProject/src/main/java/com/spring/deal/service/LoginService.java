@@ -18,8 +18,8 @@ public class LoginService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) {
-        // log.debug("디버그 : loadUserByUsername 실행됨");
-        User userPS = userRepository.findByUserId(username);
+   
+    	User userPS = userRepository.findByUserId(username);
                
         return userPS;
     }
