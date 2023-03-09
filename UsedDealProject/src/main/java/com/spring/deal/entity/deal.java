@@ -3,6 +3,8 @@ package com.spring.deal.entity;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +13,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-public class deal {
+import com.spring.deal.dto.DealDTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
+@Getter
+@Builder
+public class Deal {
 	
 	@Id
 	@Column(name = "deal_id")
@@ -31,17 +47,22 @@ public class deal {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User buyuser;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private User sellUser;
+	private User user;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "item_id")
 	private Item item;
 	
 
-
+	public static Deal dealSuccess(Item item, User user, DealDTO DealDTO) {
+		Deal deal = Deal.builder()
+				.user(user)
+				.buyUserScore(DealDTO.getBuyUserScore())
+				.sellUserScore(DealDTO.getSellUserScore())
+				.item(item)
+				.build();
+	
+		return deal;
+	}
 
 }

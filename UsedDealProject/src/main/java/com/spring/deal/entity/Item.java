@@ -72,5 +72,13 @@ public class Item {
 		this.user = user;
 	}
 	
+	public void updateItem(String itemname, String itemDescription) {
+		this.itemName = itemname;
+		this.itemDescription = itemDescription;
+	}
+	public void successItem(double userScore, double score) {
+		this.success = true;
+		this.user.userScore(userScore,score);
+	}
 	
 }

@@ -40,6 +40,8 @@ public class UserDTO {
 	
 	private boolean quit;
 	
+	private int cntDeal;
+	
 	public static UserDTO EntitiyToDTO(User user) {
 		UserDTO userDTO = UserDTO.builder()
 				.userId(user.getUserId())

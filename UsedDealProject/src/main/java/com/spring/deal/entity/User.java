@@ -64,9 +64,14 @@ public class User implements UserDetails{
 	@Column(name = "user_score", nullable = false)
 	private double userScore;
 	
+	@Column(name = "cnt_deal")
+	private int cntDeal;
+	
 	private int suspend;
 	
 	private boolean quit;
+	
+	
 	
 		
 	@Override
@@ -114,6 +119,14 @@ public class User implements UserDetails{
 	
 	public void passwordEncoding(String password) {
 		this.password = password;
+	}
+	
+	public void userScore(double userScore, double score) {
+		
+		this.userScore = (userScore*cntDeal) +score / (cntDeal+1);
+		this.cntDeal+=1;
+
+
 	}
 	
 	public static User DTOtoEntity(UserDTO userDTO) {

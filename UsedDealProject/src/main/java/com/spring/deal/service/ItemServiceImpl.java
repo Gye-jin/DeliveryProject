@@ -12,8 +12,11 @@ import com.spring.deal.common.ErrorCode;
 import com.spring.deal.common.exception.ApiControllerException;
 import com.spring.deal.dto.ItemDTO;
 import com.spring.deal.dto.ResponseDTO;
+import com.spring.deal.dto.DealDTO;
+import com.spring.deal.entity.Deal;
 import com.spring.deal.entity.Item;
 import com.spring.deal.entity.User;
+import com.spring.deal.repository.DealRepository;
 import com.spring.deal.repository.ItemRepository;
 import com.spring.deal.repository.UserRepository;
 
@@ -27,6 +30,9 @@ public class ItemServiceImpl implements ItemService{
 	
 	@Autowired
 	ItemRepository itemRepository;
+	
+	@Autowired
+	DealRepository dealRepository;
 	
 	@Transactional
 	@Override
@@ -47,5 +53,33 @@ public class ItemServiceImpl implements ItemService{
 		Item item = itemRepository.findById(itemId).orElseThrow(() -> new ApiControllerException(ErrorCode.POSTS_NOT_FOUND));
 		
 		return new ResponseEntity<ItemDTO>(ItemDTO.EntitiyToDTO(item),HttpStatus.OK);
+	}
+	@Override
+	@Transactional
+	public ResponseEntity<?> updateItem(HttpServletRequest request,Long itemId,ItemDTO itemDTO){
+		
+		Item item = itemRepository.findById(itemId).orElseThrow(() -> new ApiControllerException(ErrorCode.POSTS_NOT_FOUND));
+		if(!item.getUser().getUserId().equals(request.getAttribute("userId").toString())) {
+			throw new ApiControllerException(ErrorCode.UNAUTHORIZED);
+		}
+		item.updateItem(itemDTO.getItemName(), itemDTO.getItemDescription());
+		return new ResponseEntity<ItemDTO>(ItemDTO.EntitiyToDTO(item),HttpStatus.OK);
+	}
+	
+	@Override
+	@Transactional
+	public ResponseEntity<?> successItem(HttpServletRequest request,Long itemId, DealDTO dealDTO){
+		Item item = itemRepository.findById(itemId).orElseThrow(() -> new ApiControllerException(ErrorCode.POSTS_NOT_FOUND));
+		User user = userRepository.findById(request.getAttribute("userId").toString()).orElseThrow(() -> new ApiControllerException(ErrorCode.BAD_REQUEST));
+		
+		user.userScore(user.getUserScore(),dealDTO.getBuyUserScore());
+		item.successItem(user.getUserScore(),dealDTO.getSellUserScore());
+		Deal deal = Deal.dealSuccess(item, user, dealDTO);
+		
+		
+		dealRepository.save(deal);
+		
+		return new ResponseEntity<>("판매 성공",HttpStatus.OK);
+
 	}
 }

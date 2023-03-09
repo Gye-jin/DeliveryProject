@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class dealDTO {
+public class DealDTO {
 	
 
 	private Long dealId;
@@ -23,8 +23,6 @@ public class dealDTO {
 	
 	private UserDTO buyuser;
 	
-	private UserDTO sellUser;
-
 	private ItemDTO item;
 	
 
