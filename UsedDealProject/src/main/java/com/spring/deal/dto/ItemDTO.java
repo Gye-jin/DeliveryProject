@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ItemDTO {
 	
-
 	private Long itemId;
 	
 	private String itemName;
@@ -23,6 +22,8 @@ public class ItemDTO {
 	private String itemDescription;
 	
 	private Timestamp createdAt;
+	
+	private int itemPrice;
 	
 	private Timestamp updatedAt;
 	

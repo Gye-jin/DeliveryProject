@@ -62,7 +62,7 @@ public class ItemServiceImpl implements ItemService{
 		if(!item.getUser().getUserId().equals(request.getAttribute("userId").toString())) {
 			throw new ApiControllerException(ErrorCode.UNAUTHORIZED);
 		}
-		item.updateItem(itemDTO.getItemName(), itemDTO.getItemDescription());
+		item.updateItem(itemDTO.getItemName(), itemDTO.getItemDescription(),itemDTO.getItemPrice());
 		return new ResponseEntity<ItemDTO>(ItemDTO.EntitiyToDTO(item),HttpStatus.OK);
 	}
 	
@@ -80,6 +80,19 @@ public class ItemServiceImpl implements ItemService{
 		dealRepository.save(deal);
 		
 		return new ResponseEntity<>("판매 성공",HttpStatus.OK);
-
 	}
+	@Override
+	@Transactional
+	public ResponseEntity<?> deleteItem(HttpServletRequest request,Long itemId){
+		Item item = itemRepository.findById(itemId).orElseThrow(() -> new ApiControllerException(ErrorCode.POSTS_NOT_FOUND));
+		
+		if(!item.getUser().getUserId().equals(request.getAttribute("userId").toString())) {
+			throw new ApiControllerException(ErrorCode.UNAUTHORIZED);
+		}
+		
+		itemRepository.deleteById(itemId);
+		return new ResponseEntity<>("삭제 완료",HttpStatus.OK);
+	}
+
+	
 }

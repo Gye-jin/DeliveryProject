@@ -38,5 +38,14 @@ public class Wishlist {
 	@JoinColumn(name = "item_id")
 	private Item item;
 	
+	
+	public static Wishlist registerUserAndItem(User user, Item item) {
+		
+		Wishlist wishlist = Wishlist.builder()
+				.user(user)
+				.item(item)
+				.build();
+		return wishlist;
+	}
 
 }

@@ -1,0 +1,9 @@
+package com.spring.deal.service;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.ResponseEntity;
+
+public interface WishlistService {
+	public ResponseEntity<?> registerWishList(HttpServletRequest request,Long itemId);
+}

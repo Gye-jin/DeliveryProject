@@ -42,6 +42,9 @@ public class Item {
 	@Column(name = "item_description",nullable = false)
 	private String itemDescription;
 	
+	@Column(name ="item_price")
+	private int itemPrice;
+	
 	@CreatedDate
 	@Column(updatable = false,nullable = false,name = "created_at")
 	private Timestamp createdAt;
@@ -60,6 +63,7 @@ public class Item {
 		Item item = Item.builder()
 						.itemId(itemDTO.getItemId())
 						.itemName(itemDTO.getItemName())
+						.itemPrice(itemDTO.getItemPrice())
 						.itemDescription(itemDTO.getItemDescription())
 						.createdAt(itemDTO.getCreatedAt())
 						.updatedAt(itemDTO.getUpdatedAt())
@@ -72,9 +76,10 @@ public class Item {
 		this.user = user;
 	}
 	
-	public void updateItem(String itemname, String itemDescription) {
+	public void updateItem(String itemname, String itemDescription,int itemPrice) {
 		this.itemName = itemname;
 		this.itemDescription = itemDescription;
+		this.itemPrice = itemPrice;
 	}
 	public void successItem(double userScore, double score) {
 		this.success = true;

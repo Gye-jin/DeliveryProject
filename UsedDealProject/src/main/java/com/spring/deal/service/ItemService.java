@@ -16,4 +16,6 @@ public interface ItemService {
 	public ResponseEntity<?> updateItem(HttpServletRequest request,Long itemId,ItemDTO itemDTO);
 	
 	public ResponseEntity<?> successItem(HttpServletRequest request,Long itemId, DealDTO DealDTO);
+	
+	public ResponseEntity<?> deleteItem(HttpServletRequest request,Long itemId);
 }

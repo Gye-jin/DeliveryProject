@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.deal.dto.ItemDTO;
 import com.spring.deal.dto.DealDTO;
 import com.spring.deal.service.ItemServiceImpl;
+import com.spring.deal.service.WishlistService;
+import com.spring.deal.service.WishlistServiceImpl;
 
 @RestController
 @RequestMapping(produces = "application/json")
@@ -22,6 +25,9 @@ public class ItemController {
 	
 	@Autowired
 	ItemServiceImpl itemService;
+	
+	@Autowired
+	WishlistServiceImpl wishlistService;
 	
 	
 	@PostMapping("/posts")
@@ -44,5 +50,17 @@ public class ItemController {
 	@PutMapping("/posts/successes/{itemId}")
 	public ResponseEntity<?> success(HttpServletRequest request,@PathVariable Long itemId, @RequestBody DealDTO dealDTO){
 		return itemService.successItem(request, itemId, dealDTO);
+	}
+	
+	@DeleteMapping("/posts/{itemId}")
+	public ResponseEntity<?> delete(HttpServletRequest request,@PathVariable Long itemId){
+		
+		return itemService.deleteItem(request,itemId);
+	}
+	
+	@PostMapping("/posts/{itemId}/wishes")
+	public ResponseEntity<?> wish(HttpServletRequest request,@PathVariable Long itemId){
+		
+		return wishlistService.registerWishList(request, itemId);
 	}
 }
