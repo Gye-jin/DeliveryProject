@@ -133,15 +133,10 @@ public class User implements UserDetails{
 		User user = User.builder()
 				.userId(userDTO.getUserId())
 				.password(userDTO.getPassword())
-				.userScore(userDTO.getUserScore())
 				.accountType(userDTO.getAccountType())
 				.name(userDTO.getName())
 				.address(userDTO.getAddress())
 				.phoneNumber(userDTO.getPhoneNumber())
-				.suspend(userDTO.getSuspend())
-				.createdAt(userDTO.getCreatedAt())
-				.updatedAt(userDTO.getUpdatedAt())
-				.quit(userDTO.isQuit())
 				.build();
 		return user;
 	}

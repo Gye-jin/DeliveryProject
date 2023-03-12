@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.deal.dto.ItemDTO;
+import com.spring.deal.dto.RegistItemDTO;
 import com.spring.deal.dto.DealDTO;
 import com.spring.deal.service.ItemServiceImpl;
-import com.spring.deal.service.WishlistService;
 import com.spring.deal.service.WishlistServiceImpl;
 
 @RestController
@@ -31,9 +30,9 @@ public class ItemController {
 	
 	
 	@PostMapping("/posts")
-	public ResponseEntity<?> register(HttpServletRequest request,@RequestBody ItemDTO itemDTO){
+	public ResponseEntity<?> register(HttpServletRequest request,@RequestBody RegistItemDTO registItemDTO){
 
-		return itemService.registerItem(request,itemDTO);
+		return itemService.registerItem(request,registItemDTO);
 	}
 	
 	@GetMapping("/posts/{itemId}")
@@ -42,9 +41,9 @@ public class ItemController {
 	}
 	
 	@PutMapping("/posts/{itemId}")
-	public ResponseEntity<?> update(HttpServletRequest request,@PathVariable Long itemId, @RequestBody ItemDTO itemDTO){
+	public ResponseEntity<?> update(HttpServletRequest request,@PathVariable Long itemId, @RequestBody RegistItemDTO registItemDTO){
 		
-		return itemService.updateItem(request,itemId,itemDTO);
+		return itemService.updateItem(request,itemId,registItemDTO);
 	}
 	
 	@PutMapping("/posts/successes/{itemId}")

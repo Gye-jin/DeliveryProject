@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.spring.deal.common.ErrorCode;
 import com.spring.deal.common.exception.ApiControllerException;
 import com.spring.deal.dto.ItemDTO;
+import com.spring.deal.dto.RegistItemDTO;
 import com.spring.deal.dto.ResponseDTO;
 import com.spring.deal.dto.DealDTO;
 import com.spring.deal.entity.Deal;
@@ -36,10 +37,10 @@ public class ItemServiceImpl implements ItemService{
 	
 	@Transactional
 	@Override
-	public ResponseEntity<?> registerItem(HttpServletRequest request,ItemDTO itemDTO){
+	public ResponseEntity<?> registerItem(HttpServletRequest request,RegistItemDTO registItemDTO){
 		String userId = request.getAttribute("userId").toString();
 		User user = userRepository.findById(userId).orElseThrow(() -> new ApiControllerException(ErrorCode.UNAUTHORIZED));
-		Item item = Item.DTOtoEntity(itemDTO);
+		Item item = Item.registItem(registItemDTO);
 
 		item.registerUser(user);
 
@@ -56,13 +57,13 @@ public class ItemServiceImpl implements ItemService{
 	}
 	@Override
 	@Transactional
-	public ResponseEntity<?> updateItem(HttpServletRequest request,Long itemId,ItemDTO itemDTO){
+	public ResponseEntity<?> updateItem(HttpServletRequest request,Long itemId,RegistItemDTO registItemDTO){
 		
 		Item item = itemRepository.findById(itemId).orElseThrow(() -> new ApiControllerException(ErrorCode.POSTS_NOT_FOUND));
 		if(!item.getUser().getUserId().equals(request.getAttribute("userId").toString())) {
 			throw new ApiControllerException(ErrorCode.UNAUTHORIZED);
 		}
-		item.updateItem(itemDTO.getItemName(), itemDTO.getItemDescription(),itemDTO.getItemPrice());
+		item.updateItem(registItemDTO.getItemName(), registItemDTO.getItemDescription(),registItemDTO.getItemPrice());
 		return new ResponseEntity<ItemDTO>(ItemDTO.EntitiyToDTO(item),HttpStatus.OK);
 	}
 	

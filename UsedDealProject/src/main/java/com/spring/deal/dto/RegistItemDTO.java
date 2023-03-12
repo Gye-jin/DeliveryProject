@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class DealDTO {
+public class RegistItemDTO {
 	
-
-	private double buyUserScore;
-
-	private double sellUserScore;
+	private String itemName;
 	
+	private String itemDescription;
+	
+	private int itemPrice;
 }

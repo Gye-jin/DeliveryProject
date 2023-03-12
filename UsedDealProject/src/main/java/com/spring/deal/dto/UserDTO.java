@@ -1,7 +1,5 @@
 package com.spring.deal.dto;
 
-import java.sql.Timestamp;
-
 import com.spring.deal.entity.AccountType;
 import com.spring.deal.entity.User;
 
@@ -18,10 +16,8 @@ public class UserDTO {
 
 	private String userId;
 	
-
 	private String password;
 	
-
 	private String name;
 	
 	private String phoneNumber;
@@ -30,17 +26,6 @@ public class UserDTO {
 	
 	private AccountType accountType;
 	
-	private Timestamp createdAt;
-
-	private Timestamp updatedAt;
-
-	private double userScore;
-	
-	private int suspend;
-	
-	private boolean quit;
-	
-	private int cntDeal;
 	
 	public static UserDTO EntitiyToDTO(User user) {
 		UserDTO userDTO = UserDTO.builder()
@@ -49,12 +34,6 @@ public class UserDTO {
 				.accountType(user.getAccountType())
 				.address(user.getAddress())
 				.password(user.getPassword())
-				.createdAt(user.getCreatedAt())
-				.updatedAt(user.getUpdatedAt())
-				.phoneNumber(user.getPhoneNumber())
-				.quit(user.isQuit())
-				.userScore(user.getUserScore())
-				.suspend(user.getSuspend())
 				.build();
 		return userDTO;
 	}

@@ -14,16 +14,14 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class ItemDTO {
-	
-	private Long itemId;
-	
+		
 	private String itemName;
 	
 	private String itemDescription;
 	
-	private Timestamp createdAt;
-	
 	private int itemPrice;
+
+	private Timestamp createdAt;
 	
 	private Timestamp updatedAt;
 	
@@ -33,7 +31,6 @@ public class ItemDTO {
 	
 	public static ItemDTO EntitiyToDTO(Item item) {
 		ItemDTO itemDTO = ItemDTO.builder()
-				.itemId(item.getItemId())
 				.itemName(item.getItemName())
 				.itemDescription(item.getItemDescription())
 				.createdAt(item.getCreatedAt())

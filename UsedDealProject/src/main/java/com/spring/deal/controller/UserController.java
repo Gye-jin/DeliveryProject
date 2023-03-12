@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.deal.dto.LoginDTO;
 import com.spring.deal.dto.UserDTO;
 import com.spring.deal.service.UserServiceImpl;
 
@@ -23,7 +24,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public void login(@RequestBody UserDTO userDTO){
+	public void login(@RequestBody LoginDTO loginDTO){
 	}
 	
 	

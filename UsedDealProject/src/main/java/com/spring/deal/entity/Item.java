@@ -17,6 +17,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.spring.deal.dto.ItemDTO;
+import com.spring.deal.dto.RegistItemDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -61,7 +62,6 @@ public class Item {
 	
 	public static Item DTOtoEntity(ItemDTO itemDTO) {
 		Item item = Item.builder()
-						.itemId(itemDTO.getItemId())
 						.itemName(itemDTO.getItemName())
 						.itemPrice(itemDTO.getItemPrice())
 						.itemDescription(itemDTO.getItemDescription())
@@ -69,6 +69,15 @@ public class Item {
 						.updatedAt(itemDTO.getUpdatedAt())
 						.success(itemDTO.isSuccess())
 						.build();
+		return item;
+	}
+	
+	public static Item registItem(RegistItemDTO registItemDTO) {
+		Item item = Item.builder()
+				.itemName(registItemDTO.getItemName())
+				.itemPrice(registItemDTO.getItemPrice())
+				.itemDescription(registItemDTO.getItemDescription())
+				.build();
 		return item;
 	}
 	
