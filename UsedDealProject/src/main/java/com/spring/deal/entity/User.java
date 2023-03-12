@@ -122,11 +122,11 @@ public class User implements UserDetails{
 	}
 	
 	public void userScore(double userScore, double score) {
-		
-		this.userScore = (userScore*cntDeal) +score / (cntDeal+1);
+
+		this.userScore = ((userScore*cntDeal) +score) / (cntDeal+1.0);
 		this.cntDeal+=1;
-
-
+		System.out.println(userScore);
+		System.out.println(cntDeal);
 	}
 	
 	public static User DTOtoEntity(UserDTO userDTO) {

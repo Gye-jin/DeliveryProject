@@ -76,10 +76,8 @@ public class ItemServiceImpl implements ItemService{
 		user.userScore(user.getUserScore(),dealDTO.getBuyUserScore());
 		item.successItem(user.getUserScore(),dealDTO.getSellUserScore());
 		Deal deal = Deal.dealSuccess(item, user, dealDTO);
-		
-		
+
 		dealRepository.save(deal);
-		
 		return new ResponseEntity<>("판매 성공",HttpStatus.OK);
 	}
 	@Override

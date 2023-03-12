@@ -33,6 +33,7 @@ public class UserDTO {
 				.name(user.getName())
 				.accountType(user.getAccountType())
 				.address(user.getAddress())
+				.phoneNumber(user.getPhoneNumber())
 				.password(user.getPassword())
 				.build();
 		return userDTO;

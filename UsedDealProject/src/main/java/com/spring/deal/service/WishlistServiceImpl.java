@@ -36,11 +36,15 @@ public class WishlistServiceImpl implements WishlistService{
 	public ResponseEntity<?> registerWishList(HttpServletRequest request,Long itemId){
 		Item item = itemRepository.findById(itemId).orElseThrow(() -> new ApiControllerException(ErrorCode.POSTS_NOT_FOUND));
 		User user = userRepository.findById(request.getAttribute("userId").toString()).orElseThrow(() -> new ApiControllerException(ErrorCode.BAD_REQUEST));
+		if(!wishlistRepository.existsByItemAndUser(item, user)) {
+			Wishlist wishlist = Wishlist.registerUserAndItem(user, item);
+			wishlistRepository.save(wishlist);
+			
+			return new ResponseEntity<>(new ResponseDTO<>("위시리스트 등록완료",wishlist.getWishListId()),HttpStatus.CREATED);
+		}else
+			return new ResponseEntity<>(new ResponseDTO<>("위시리스트에 있는 아이템입니다.",itemId),HttpStatus.BAD_REQUEST);
 		
-		Wishlist wishlist = Wishlist.registerUserAndItem(user, item);
-		wishlistRepository.save(wishlist);
 		
-		return new ResponseEntity<>(new ResponseDTO<>("판매등록성공",wishlist.getWishListId()),HttpStatus.CREATED);
 	}
 
 }
