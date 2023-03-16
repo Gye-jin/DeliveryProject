@@ -16,6 +16,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.spring.deal.dto.WriteCommentDTO;
 
 import lombok.AllArgsConstructor;
@@ -49,10 +50,12 @@ public class Comment {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
+	@JsonIgnore
 	private User user;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "item_id")
+	@JsonIgnore
 	private Item item;
 	
 	public static Comment writeComment(WriteCommentDTO writeCommentDTO) {
@@ -67,5 +70,7 @@ public class Comment {
 		this.user = user;
 		this.item = item;
 	}
+	
+
 	
 }

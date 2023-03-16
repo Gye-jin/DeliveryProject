@@ -1,6 +1,9 @@
 package com.spring.deal.dto;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.spring.deal.entity.Item;
 
@@ -29,6 +32,8 @@ public class ItemDTO {
 	
 	private UserDTO user;
 	
+	private List<CommentDTO> comments = new ArrayList<>();
+	
 	public static ItemDTO EntitiyToDTO(Item item) {
 		ItemDTO itemDTO = ItemDTO.builder()
 				.itemName(item.getItemName())
@@ -37,6 +42,9 @@ public class ItemDTO {
 				.updatedAt(item.getUpdatedAt())
 				.success(item.isSuccess())
 				.user(UserDTO.EntitiyToDTO(item.getUser()))
+				.comments(item.getComments().stream()
+						.map(comment -> CommentDTO.EntityToDTO(comment))
+						.collect(Collectors.toList()))
 				.build();
 		return itemDTO;
 	}

@@ -52,7 +52,7 @@ public class ItemServiceImpl implements ItemService{
 	public ResponseEntity<?> checkItem(HttpServletRequest request,Long itemId){
 		
 		Item item = itemRepository.findById(itemId).orElseThrow(() -> new ApiControllerException(ErrorCode.POSTS_NOT_FOUND));
-		
+
 		return new ResponseEntity<ItemDTO>(ItemDTO.EntitiyToDTO(item),HttpStatus.OK);
 	}
 	@Override
