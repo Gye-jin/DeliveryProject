@@ -20,7 +20,7 @@ public class ItemDTO {
 	private String itemDescription;
 	
 	private int itemPrice;
-
+	
 	private Timestamp createdAt;
 	
 	private Timestamp updatedAt;
