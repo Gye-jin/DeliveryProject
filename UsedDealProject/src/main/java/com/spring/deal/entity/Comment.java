@@ -71,6 +71,9 @@ public class Comment {
 		this.item = item;
 	}
 	
+	public void UpdateComment(String commentContent) {
+		this.commentContent = commentContent;
+	}
 
 	
 }

@@ -46,4 +46,28 @@ public class CommentServiceImpl implements CommentService{
 		commentRepository.save(comment);
 		return new ResponseEntity<>(new ResponseDTO<>("댓글 등록성공",comment.getCommentId()),HttpStatus.CREATED);
 	}
+	
+	@Override
+	@Transactional
+	public ResponseEntity<?> deleteComment(HttpServletRequest request,Long commentId){
+		String userId = request.getAttribute("userId").toString();
+		Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ApiControllerException(ErrorCode.POSTS_NOT_FOUND));
+		if(!comment.getUser().getUserId().equals(userId)) {
+			throw new ApiControllerException(ErrorCode.UNAUTHORIZED);
+		}
+		commentRepository.deleteById(commentId);
+		return new ResponseEntity<>(new ResponseDTO<>("댓글 삭제 성공",comment.getCommentId()),HttpStatus.OK);
+	}
+	
+	@Override
+	@Transactional
+	public ResponseEntity<?> updateComment(HttpServletRequest request,Long commentId, WriteCommentDTO writeCommetnDTO){
+		String userId = request.getAttribute("userId").toString();
+		Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new ApiControllerException(ErrorCode.POSTS_NOT_FOUND));
+		if(!comment.getUser().getUserId().equals(userId)) {
+			throw new ApiControllerException(ErrorCode.UNAUTHORIZED);
+		}
+		comment.UpdateComment(writeCommetnDTO.getCommentContent());
+		return new ResponseEntity<>(new ResponseDTO<>("댓글 수정 성공",comment.getCommentId()),HttpStatus.OK);
+	}
 }
