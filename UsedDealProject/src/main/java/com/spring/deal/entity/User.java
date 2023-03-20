@@ -101,8 +101,11 @@ public class User implements UserDetails{
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
+		if(this.accountType.equals(AccountType.정지)) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 
 	@Override
@@ -114,7 +117,7 @@ public class User implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return !this.quit;
 	}
 	
 	public void passwordEncoding(String password) {
@@ -139,6 +142,11 @@ public class User implements UserDetails{
 	}
 
 
+	public void suspend() {
+		this.suspend +=1;
+	}
 	
-	
+	public void AccountLocked() {
+		this.accountType = AccountType.정지;
+	}
 }

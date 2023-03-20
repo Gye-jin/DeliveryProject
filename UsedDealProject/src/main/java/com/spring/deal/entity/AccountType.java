@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum AccountType {
-	고객("user"), 관리자("admin");
+	고객("user"), 관리자("admin"),정지("suspended");
 
 	private String AccountType;
 
