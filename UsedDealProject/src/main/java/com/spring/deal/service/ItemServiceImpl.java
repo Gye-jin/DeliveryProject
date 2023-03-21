@@ -64,7 +64,7 @@ public class ItemServiceImpl implements ItemService{
 			throw new ApiControllerException(ErrorCode.UNAUTHORIZED);
 		}
 		item.updateItem(registItemDTO.getItemName(), registItemDTO.getItemDescription(),registItemDTO.getItemPrice());
-		return new ResponseEntity<ItemDTO>(ItemDTO.EntitiyToDTO(item),HttpStatus.OK);
+		return new ResponseEntity<>(new ResponseDTO<>("아이템 수정 성공",item.getItemId()),HttpStatus.OK);
 	}
 	
 	@Override

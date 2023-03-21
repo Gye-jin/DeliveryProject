@@ -60,4 +60,13 @@ public class UserServiceImpl implements UserService{
 		
 		return new ResponseEntity<>(new ResponseDTO<>("신고완료",dealId),HttpStatus.CREATED);
 	}
+	
+	@Override
+	@Transactional
+	public ResponseEntity<?> deleteUser(HttpServletRequest request){
+		User user = userRepository.findById(request.getAttribute("userId").toString()).orElseThrow(() -> new ApiControllerException(ErrorCode.BAD_REQUEST));
+		user.quit();
+		
+		return new ResponseEntity<>(new ResponseDTO<>("회원탈퇴성공",user.getUserId()),HttpStatus.OK);
+	}
 }

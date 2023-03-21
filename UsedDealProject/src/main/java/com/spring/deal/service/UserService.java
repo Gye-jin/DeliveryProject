@@ -10,4 +10,6 @@ public interface UserService {
 	public ResponseEntity<?> joinUser(UserDTO userDTO);
 	
 	public ResponseEntity<?> suspendUser(HttpServletRequest request, Long dealId);
+
+	public ResponseEntity<?> deleteUser(HttpServletRequest request);
 }

@@ -149,4 +149,7 @@ public class User implements UserDetails{
 	public void AccountLocked() {
 		this.accountType = AccountType.정지;
 	}
+	public void quit() {
+		this.quit = true;
+	}
 }

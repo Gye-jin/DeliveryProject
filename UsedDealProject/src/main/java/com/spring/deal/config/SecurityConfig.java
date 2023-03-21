@@ -40,7 +40,7 @@ public class SecurityConfig {
 	        http.csrf().disable()
 	        .authorizeRequests()
 	        .antMatchers("/join","/login").permitAll()
-			.antMatchers("/api/**").authenticated()
+			.antMatchers("/posts/**","/users/**").authenticated()
 			.and()
 			.sessionManagement()
 			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
