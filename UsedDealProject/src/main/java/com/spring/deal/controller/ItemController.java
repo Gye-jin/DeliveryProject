@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.deal.dto.RegistItemDTO;
 import com.spring.deal.dto.DealDTO;
 import com.spring.deal.service.ItemServiceImpl;
-import com.spring.deal.service.WishlistServiceImpl;
 
 @RestController
 @RequestMapping(produces = "application/json")
@@ -25,11 +24,7 @@ public class ItemController {
 	
 	@Autowired
 	ItemServiceImpl itemService;
-	
-	@Autowired
-	WishlistServiceImpl wishlistService;
-	
-	
+		
 	@PostMapping("/posts")
 	public ResponseEntity<?> register(HttpServletRequest request,@RequestBody RegistItemDTO registItemDTO){
 
@@ -58,9 +53,6 @@ public class ItemController {
 		return itemService.deleteItem(request,itemId);
 	}
 	
-	@PostMapping("/posts/{itemId}/wishes")
-	public ResponseEntity<?> wish(HttpServletRequest request,@PathVariable Long itemId){
-		
-		return wishlistService.registerWishList(request, itemId);
-	}
+
+	
 }

@@ -9,5 +9,7 @@ import com.spring.deal.entity.Wishlist;
 public interface WishlistRepository extends JpaRepository<Wishlist, Long>{
 	
 	public boolean existsByItemAndUser(Item item, User user);
+	
+	public boolean existsByUserAndWishListId(User user, Long wishListId);
 
 }
