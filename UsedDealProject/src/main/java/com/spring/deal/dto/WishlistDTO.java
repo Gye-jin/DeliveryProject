@@ -1,5 +1,7 @@
 package com.spring.deal.dto;
 
+import com.spring.deal.entity.Wishlist;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,9 +16,15 @@ public class WishlistDTO {
 
 	private Long wishListId;
 
-	private UserDTO user;
-
-	private ItemDTO item;
+	private PageDTO item;
 	
-
+	
+	public static WishlistDTO EntitiyToDTO(Wishlist wishList) {
+		WishlistDTO wishlistDTO = WishlistDTO.builder()
+				.wishListId(wishList.getWishListId())
+				.item(PageDTO.EntitiyToDTO(wishList.getItem()))
+				.build();
+				
+		return wishlistDTO;
+	}
 }

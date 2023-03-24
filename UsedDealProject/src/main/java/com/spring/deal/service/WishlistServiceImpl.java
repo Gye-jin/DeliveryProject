@@ -1,5 +1,8 @@
 package com.spring.deal.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.spring.deal.common.ErrorCode;
 import com.spring.deal.common.exception.ApiControllerException;
 import com.spring.deal.dto.ResponseDTO;
+import com.spring.deal.dto.WishlistDTO;
 import com.spring.deal.entity.Item;
 import com.spring.deal.entity.User;
 import com.spring.deal.entity.Wishlist;
@@ -56,6 +60,19 @@ public class WishlistServiceImpl implements WishlistService{
 		wishlistRepository.deleteById(wishListId);
 		
 		return new ResponseEntity<>(new ResponseDTO<>("위시리스트 삭제완료",wishListId),HttpStatus.OK);
+	}
+	
+	@Override
+	public ResponseEntity<?> getWishList(HttpServletRequest request){
+		User user = userRepository.findById(request.getAttribute("userId").toString()).orElseThrow(() -> new ApiControllerException(ErrorCode.BAD_REQUEST));
+		
+		List<Wishlist> wishlists = wishlistRepository.findByUser(user);
+		List<WishlistDTO> wishListDTOs = wishlists.stream()
+				.map(wishList -> WishlistDTO.EntitiyToDTO(wishList))
+				.collect(Collectors.toList());
+		
+		
+		return new ResponseEntity<>(wishListDTOs,HttpStatus.OK);
 	}
 	
 

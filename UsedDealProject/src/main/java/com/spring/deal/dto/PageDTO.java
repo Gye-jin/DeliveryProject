@@ -1,9 +1,6 @@
 package com.spring.deal.dto;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import com.spring.deal.entity.Item;
 
@@ -16,10 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class ItemDTO {
+public class PageDTO {
 	
 	private Long itemId;
-		
+	
 	private String itemName;
 	
 	private String itemDescription;
@@ -32,23 +29,19 @@ public class ItemDTO {
 	
 	private boolean success;
 	
-	private UserDTO user;
+	private String userId;	
 	
-	private List<CommentDTO> comments = new ArrayList<>();
-	
-	public static ItemDTO EntitiyToDTO(Item item) {
-		ItemDTO itemDTO = ItemDTO.builder()
+	public static PageDTO EntitiyToDTO(Item item) {
+		PageDTO pageDTO = PageDTO.builder()
 				.itemId(item.getItemId())
 				.itemName(item.getItemName())
 				.itemDescription(item.getItemDescription())
+				.itemPrice(item.getItemPrice())
 				.createdAt(item.getCreatedAt())
 				.updatedAt(item.getUpdatedAt())
 				.success(item.isSuccess())
-				.user(UserDTO.EntitiyToDTO(item.getUser()))
-				.comments(item.getComments().stream()
-						.map(comment -> CommentDTO.EntityToDTO(comment))
-						.collect(Collectors.toList()))
+				.userId(item.getUser().getUserId())
 				.build();
-		return itemDTO;
+		return pageDTO;
 	}
 }

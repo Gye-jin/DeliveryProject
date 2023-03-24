@@ -8,4 +8,6 @@ public interface WishlistService {
 	public ResponseEntity<?> registerWishList(HttpServletRequest request,Long itemId);
 	
 	public ResponseEntity<?> cancelWishList(HttpServletRequest request,Long wishListId);
+	
+	public ResponseEntity<?> getWishList(HttpServletRequest request);
 }
