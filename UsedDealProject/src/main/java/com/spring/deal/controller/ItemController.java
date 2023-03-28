@@ -25,29 +25,29 @@ public class ItemController {
 	@Autowired
 	ItemServiceImpl itemService;
 		
-	@PostMapping("/posts")
+	@PostMapping("/items")
 	public ResponseEntity<?> register(HttpServletRequest request,@RequestBody RegistItemDTO registItemDTO){
 
 		return itemService.registerItem(request,registItemDTO);
 	}
 	
-	@GetMapping("/posts/{itemId}")
+	@GetMapping("/items/{itemId}")
 	public ResponseEntity<?> check(HttpServletRequest request,@PathVariable Long itemId){
 		return itemService.checkItem(request,itemId);
 	}
 	
-	@PatchMapping("/posts/{itemId}")
+	@PatchMapping("/items/{itemId}")
 	public ResponseEntity<?> update(HttpServletRequest request,@PathVariable Long itemId, @RequestBody RegistItemDTO registItemDTO){
 		
 		return itemService.updateItem(request,itemId,registItemDTO);
 	}
 	
-	@PutMapping("/posts/successes/{itemId}")
+	@PutMapping("/items/successes/{itemId}")
 	public ResponseEntity<?> success(HttpServletRequest request,@PathVariable Long itemId, @RequestBody DealDTO dealDTO){
 		return itemService.successItem(request, itemId, dealDTO);
 	}
 	
-	@DeleteMapping("/posts/{itemId}")
+	@DeleteMapping("/items/{itemId}")
 	public ResponseEntity<?> delete(HttpServletRequest request,@PathVariable Long itemId){
 		
 		return itemService.deleteItem(request,itemId);

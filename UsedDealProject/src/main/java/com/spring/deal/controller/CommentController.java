@@ -22,18 +22,18 @@ public class CommentController {
 	@Autowired
 	CommentServiceImpl commentService;
 	
-	@PostMapping("/posts/{itemId}/comments")
+	@PostMapping("/items/{itemId}/comments")
 	public ResponseEntity<?> writeComments(HttpServletRequest request,@PathVariable Long itemId, @RequestBody WriteCommentDTO writeCommetnDTO){
 		
 		return commentService.writeComment(request,itemId, writeCommetnDTO);
 	}
 	
-	@DeleteMapping("/posts/delete/{commentId}")
+	@DeleteMapping("/items/delete/{commentId}")
 	public ResponseEntity<?> deleteComments(HttpServletRequest request,@PathVariable Long commentId){
 		return commentService.deleteComment(request,commentId);
 	}
 	
-	@PutMapping("/posts/{commentId}")
+	@PutMapping("/items/{commentId}")
 	public ResponseEntity<?> updateComments(HttpServletRequest request,@PathVariable Long commentId, @RequestBody WriteCommentDTO writeCommetnDTO){
 		
 		return commentService.updateComment(request,commentId,writeCommetnDTO);

@@ -20,17 +20,17 @@ public class WishListController {
 	@Autowired
 	WishlistServiceImpl wishlistService;
 	
-	@PostMapping("/posts/{itemId}/wishes")
+	@PostMapping("/items/{itemId}/wishes")
 	public ResponseEntity<?> wish(HttpServletRequest request,@PathVariable Long itemId){
 		
 		return wishlistService.registerWishList(request, itemId);
 	}
-	@DeleteMapping("/posts/wishes/{wishListId}")
+	@DeleteMapping("/items/wishes/{wishListId}")
 	public ResponseEntity<?> wishCancel(HttpServletRequest request,@PathVariable Long wishListId){
 		
 		return wishlistService.cancelWishList(request, wishListId);
 	}
-	@GetMapping("/posts/wishes")
+	@GetMapping("/items/wishes")
 	public ResponseEntity<?> getWishlist(HttpServletRequest request){
 		
 		return wishlistService.getWishList(request);
